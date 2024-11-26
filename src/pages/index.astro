@@ -4,7 +4,9 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<header class="py-3 px-10 flex items-center fixed top-0 w-full justify-between">
+		<header
+			class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
+		>
 			<div class="flex flex-grow basis-0">
 				<svg
 					class="h-6 w-28"
@@ -19,7 +21,9 @@ import Layout from "../layouts/Layout.astro";
 
 			<nav>
 				<!-- [&>li>a] es para agregarle estilos a todos los a dentro del actual elemento y no ir uno por uno dandoles estilo -->
-				<ul class="flex text-sm [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
+				<ul
+					class="flex text-sm  [&>li>a]:text-white [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+				>
 					<li><a href="#">Model S</a></li>
 					<li><a href="#">Model 3</a></li>
 					<li><a href="#">Model X</a></li>
@@ -30,7 +34,9 @@ import Layout from "../layouts/Layout.astro";
 			</nav>
 
 			<nav class="flex flex-grow basis-0 justify-end">
-				<ul class="flex text-sm [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
+				<ul
+					class="flex text-sm  [&>li>a]:text-white [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+				>
 					<li><a href="#">Soporte</a></li>
 					<li><a href="#">Tienda</a></li>
 					<li><a href="#">Cuenta</a></li>
@@ -38,5 +44,12 @@ import Layout from "../layouts/Layout.astro";
 				</ul>
 			</nav>
 		</header>
+
+		<section class="bg-black h-screen w-screen text-center relative overflow-hidden">
+			<h2>Disfrute de Tesla</h2>
+			<p>Programe una prueba de conducción hoy mismo</p>
+			<a href="#">Prueba de conducción</a>
+			<video autoplay muted loop src="/video.webm" />
+		</section>
 	</main>
 </Layout>
