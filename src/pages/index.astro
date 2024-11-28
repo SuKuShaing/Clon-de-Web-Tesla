@@ -22,7 +22,7 @@ import Layout from "../layouts/Layout.astro";
 			<nav>
 				<!-- [&>li>a] es para agregarle estilos a todos los a dentro del actual elemento y no ir uno por uno dandoles estilo -->
 				<ul
-					class="flex text-sm  [&>li>a]:text-white [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+					class="flex text-sm [&>li>a]:text-white [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
 				>
 					<li><a href="#">Model S</a></li>
 					<li><a href="#">Model 3</a></li>
@@ -35,7 +35,7 @@ import Layout from "../layouts/Layout.astro";
 
 			<nav class="flex flex-grow basis-0 justify-end">
 				<ul
-					class="flex text-sm  [&>li>a]:text-white [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+					class="flex text-sm [&>li>a]:text-white [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
 				>
 					<li><a href="#">Soporte</a></li>
 					<li><a href="#">Tienda</a></li>
@@ -45,16 +45,35 @@ import Layout from "../layouts/Layout.astro";
 			</nav>
 		</header>
 
-		<section class="bg-black h-screen w-screen text-center relative overflow-hidden">
-			<header class="z-30 relative">
-				<h2 class="text-white pt-40 text-[40px] font-medium">Disfrute de Tesla</h2>
-				<p class="text-white text-sm">Programe una prueba de conducción hoy mismo</p>
-			</header>
-			<footer class="z-30 relative flex flex-grow flex-nowrap justify-end flex-col">
-				<a href="#">Prueba de conducción 2</a>
-			</footer>
-			<div class="absolute top-0 bottom-0 h-full z-10">
-				<video class="object-center object-cover h-full" autoplay muted loop src="/video.webm" />
+		<section
+			class="bg-black h-screen w-screen text-center relative overflow-hidden"
+		>
+			<div class="z-30 relative h-full flex flex-col">
+				<header class="">
+					<h2 class="text-white pt-40 text-[40px] font-medium">
+						Disfrute de Tesla
+					</h2>
+					<p class="text-white text-sm">
+						Programe una prueba de conducción hoy mismo
+					</p>
+				</header>
+
+				<footer class="flex flex-col flex-grow justify-end p-20">
+					<div>
+						<a
+							class="border-[3px] border-white bg-white/5 backdrop-blur-sm text-sm rounded font-medium text-white px-12 py-2 inline-block hover:bg-white hover:text-black transition-colors"
+							href="#">Prueba de conducción</a
+						>
+					</div>
+				</footer>
+			</div>
+			<div class="absolute top-0 bottom-0 h-full z-10 w-full">
+				<video
+					class="object-center object-cover h-full w-full"
+					autoplay
+					muted
+					loop
+					src="/video.webm"></video>
 			</div>
 		</section>
 	</main>
