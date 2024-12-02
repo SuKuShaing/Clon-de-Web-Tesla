@@ -34,27 +34,62 @@ import Logo from "./Logo.astro";
 			<li><a href="#">Menú</a></li>
 		</ul>
 	</nav>
+
+	<div
+		id="menu-backdrop"
+		class="absolute bg-black/5 backdrop-blur-lg rounded translate-x-[var(--left)] translate-y-[var(--top)] w-[var(--width)] h-[var(--height)] transition-all duration-500 ease-in-out opacity-0 -z-10 top-0 left-0 "
+	>
+	</div>
 </header>
 
 <script>
-	const headerElement = document.querySelector("#landing-header") as HTMLElement
+	const listItem = document.querySelectorAll("#landing-header li");
+	const menuBackdrop = document.querySelector("#menu-backdrop") as HTMLElement;
+
+	listItem.forEach((item) => {
+		item.addEventListener("mouseenter", () => {
+			const { left, top, width, height } = item.getBoundingClientRect();
+			const { clientHeight, clientWidth } = item;
+
+			console.log({ left, top, width, height });
+			console.log({ clientHeight, clientWidth });
+
+			menuBackdrop.style.setProperty("--left", `${left}px`);
+			menuBackdrop.style.setProperty("--top", `${top}px`);
+			menuBackdrop.style.setProperty("--width", `${width}px`);
+			menuBackdrop.style.setProperty("--height", `${height}px`);
+			menuBackdrop.style.opacity = "1";
+			menuBackdrop.style.visibility = "visible";
+		});
+
+		item.addEventListener("mouseleave", () => {
+			menuBackdrop.style.opacity = "0";
+			menuBackdrop.style.visibility = "hidden";
+		});
+	});
+</script>
+
+<script>
+	const headerElement = document.querySelector(
+		"#landing-header"
+	) as HTMLElement;
 
 	const observerOptions = {
 		root: null, // que elemento es el que va a ser el root, o puedo referenciar a un elemento en especifico dentro de la pagina
 		rootMargin: "0px", // en cuanto se vea queremos saber si el elemento esta en el viewport
 		threshold: 0.9, // en cuanto porcentaje de visibilidad queremos que se dispare el evento
-	}
+	};
 
-	const observer = new IntersectionObserver(entries => {
-		entries.forEach(entry => {
-			const { isIntersecting } = entry
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			const { isIntersecting } = entry;
 			if (isIntersecting) {
-				const color = entry.target.getAttribute("data-header-color")
-				headerElement.style.color = color
+				const color = entry.target.getAttribute("data-header-color");
+				headerElement.style.color = color;
 			}
-		})
-	}, observerOptions)
+		});
+	}, observerOptions);
 
-	const sectionsElement = document.querySelectorAll(".landing-section")
-	sectionsElement.forEach(section => observer.observe(section))
+	const sectionsElement = document.querySelectorAll(".landing-section");
+	sectionsElement.forEach((section) => observer.observe(section));
 </script>
