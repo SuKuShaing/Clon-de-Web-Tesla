@@ -3,6 +3,7 @@ import Logo from "./Logo.astro";
 ---
 
 <header
+	id="landing-header"
 	class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
 >
 	<div class="flex flex-grow basis-0">
@@ -12,7 +13,7 @@ import Logo from "./Logo.astro";
 	<nav>
 		<!-- [&>li>a] es para agregarle estilos a todos los a dentro del actual elemento y no ir uno por uno dandoles estilo -->
 		<ul
-			class="flex text-sm [&>li>a]:text-white [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+			class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
 		>
 			<li><a href="#">Model S</a></li>
 			<li><a href="#">Model 3</a></li>
@@ -25,7 +26,7 @@ import Logo from "./Logo.astro";
 
 	<nav class="flex flex-grow basis-0 justify-end">
 		<ul
-			class="flex text-sm [&>li>a]:text-white [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+			class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
 		>
 			<li><a href="#">Soporte</a></li>
 			<li><a href="#">Tienda</a></li>
@@ -34,3 +35,26 @@ import Logo from "./Logo.astro";
 		</ul>
 	</nav>
 </header>
+
+<script>
+	const headerElement = document.querySelector("#landing-header") as HTMLElement
+
+	const observerOptions = {
+		root: null, // que elemento es el que va a ser el root, o puedo referenciar a un elemento en especifico dentro de la pagina
+		rootMargin: "0px", // en cuanto se vea queremos saber si el elemento esta en el viewport
+		threshold: 0.9, // en cuanto porcentaje de visibilidad queremos que se dispare el evento
+	}
+
+	const observer = new IntersectionObserver(entries => {
+		entries.forEach(entry => {
+			const { isIntersecting } = entry
+			if (isIntersecting) {
+				const color = entry.target.getAttribute("data-header-color")
+				headerElement.style.color = color
+			}
+		})
+	}, observerOptions)
+
+	const sectionsElement = document.querySelectorAll(".landing-section")
+	sectionsElement.forEach(section => observer.observe(section))
+</script>
